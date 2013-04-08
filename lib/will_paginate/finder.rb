@@ -64,8 +64,11 @@ module WillPaginate
       def paginate(*args)
         options = args.pop
         page, per_page, total_entries = wp_parse_options(options)
-        finder = (options[:finder] || 'find').to_s
-
+        
+        # bug with original oddly ageed version
+        # finder = (options[:finder] || 'find').to_s
+        finder = args.shift
+  
         if finder == 'find'
           # an array of IDs may have been given:
           total_entries ||= (Array === args.first and args.first.size)
